@@ -29,11 +29,11 @@ Navigate to the day's kotlin folder and run:
 ```bash
 cd dayXX/kotlin
 # Option 1: Compile and run
-kotlinc Main.kt -include-runtime -d Main.jar
+kotlinc Main.kts -include-runtime -d Main.jar
 java -jar Main.jar
 
 # Option 2: Run as script
-kotlin Main.kt
+kotlinc -script Main.kts
 ```
 
 ### Haskell
