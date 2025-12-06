@@ -57,4 +57,4 @@ runhaskell Main.hs
 
 ## Progress
 
-- [x] Day 01
+- [ ] Day 01 - ⚙️ Boilerplate ready
