@@ -42,18 +42,16 @@ Navigate to the day's haskell folder and run:
 
 ```bash
 cd dayXX/haskell
-# Option 1: Compile and run
-ghc Main.hs -o main
-./main
-
-# Option 2: Run directly with interpreter
-runhaskell Main.hs
+cabal run
 ```
 
 ## Prerequisites
 
 - **Kotlin**: [Kotlin compiler](https://kotlinlang.org/docs/command-line.html)
-- **Haskell**: [GHC](https://www.haskell.org/ghc/) or [Stack](https://docs.haskellstack.org/)
+- **Haskell**: [GHCup](https://www.haskell.org/ghcup/) (installs GHC, cabal, and other tools)
+  - Install GHCup: `curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh`
+  - On macOS with Homebrew: `brew install ghcup`
+  - This will install GHC (the compiler), cabal (build tool), and other Haskell tools
 
 ## Progress
 
