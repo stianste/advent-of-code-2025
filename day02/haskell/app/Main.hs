@@ -29,8 +29,8 @@ main = do
       putStrLn $ "Part 1: " ++ show (sum invalidIDs)
 
       -- Part 2
-      let part2Result = solvePart2 rangeTuples
-      putStrLn $ "Part 2: " ++ show part2Result
+      let invalidIDs2 = solvePart2 rangeTuples
+      putStrLn $ "Part 2: " ++ show (sum invalidIDs2)
 
 solvePart1 :: [(Int, Int)] -> [Int]
 solvePart1 inputRanges =
@@ -50,11 +50,29 @@ isRepeatedTwice n =
       len = length s
   in len `mod` 2 == 0 && let (first, second) = splitAt (len `div` 2) s in first == second
 
+isRepeatedPattern :: Int -> Bool
+isRepeatedPattern n =
+  -- Bottom up approach. So for 123123123, start by 1, create 111111111, check if that equals 123123123 – nope.
+  -- Then check 12, which is not divisible by the string length, so we move on.
+  -- Then substring 123, create 123123123, which is a match. Do this for all substrings from 1 to half the length of the string.
+  let s = show n
+      strLen = length s
+      isValidRepeat subLen =
+        strLen `isDivisibleBy` subLen &&
+        let pattern = take subLen s
+            repeatCount = strLen `div` subLen
+            repeated = concat $ replicate repeatCount pattern
+        in repeated == s
+  in any isValidRepeat [1 .. strLen `div` 2]
+
+
+isDivisibleBy :: Int -> Int -> Bool
+isDivisibleBy n m = n `mod` m == 0
+
 -- Part 2 solution
-solvePart2 :: [(Int, Int)] -> String
-solvePart2 _inputRanges =
-  -- TODO: Implement Part 2 solution
-  "Not implemented yet"
+solvePart2 :: [(Int, Int)] -> [Int]
+solvePart2 inputRanges =
+  [ n | (start, end) <- inputRanges, n <- [start..end], isRepeatedPattern n ]
 
 readInputFile :: FilePath -> IO (Maybe String)
 readInputFile path =
